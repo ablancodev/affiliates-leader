@@ -21,7 +21,7 @@
  * Plugin Name: Affiliates Leader
  * Plugin URI: http://www.eggemplo.com
  * Description: Affiliates leader board
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: eggemplo
  * Author URI: http://www.eggemplo.com
  * Text Domain: affiliates-leader
@@ -45,8 +45,6 @@ class AffiliatesLeader_Plugin {
 
 	public static function init() {
 
-		load_plugin_textdomain( 'affiliates-leader', null, AFFILIATES_LEADER_PLUGIN_NAME . '/languages' );
-
 		register_activation_hook( AFFILIATES_LEADER_FILE, array( __CLASS__, 'activate' ) );
 		register_deactivation_hook( AFFILIATES_LEADER_FILE, array( __CLASS__, 'deactivate' ) );
 
@@ -59,6 +57,7 @@ class AffiliatesLeader_Plugin {
 	}
 
 	public static function wp_init() {
+		load_plugin_textdomain( 'affiliates-leader', false, 'affiliates-leader/languages' );
 	}
 
 	public static function affiliates_leader_widgets_init() {

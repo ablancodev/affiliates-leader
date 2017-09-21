@@ -65,7 +65,7 @@ class AffiliatesLeaderWidget extends WP_Widget {
 		$ref_table = $affiliates_db->get_tablename( 'referrals' );
 		$status = "active";
 
-		$totals = $wpdb->get_results( "SELECT `affiliate_id`, `currency_id`, SUM(`amount`) as 'total'  FROM `" . $ref_table . "` WHERE `status` = 'accepted' GROUP BY `affiliate_id` ORDER BY `total` " . $order . ' LIMIT ' . $limit, ARRAY_A );
+		$totals = $wpdb->get_results( "SELECT `affiliate_id`, `currency_id`, SUM(`amount`) as 'total'  FROM `" . $ref_table . "` WHERE `status` = 'accepted' OR `status` = 'closed' GROUP BY `affiliate_id` ORDER BY `total` " . $order . ' LIMIT ' . $limit, ARRAY_A );
 
 		if ( ( $totals ) && ( sizeof( $totals ) > 0 ) ) {
 			echo '<ul>';
@@ -76,7 +76,7 @@ class AffiliatesLeaderWidget extends WP_Widget {
 			}
 			echo '</ul>';
 		} else {
-			echo '<p>' . __ ( 'No Affiliates' ) . '</p>';
+			echo '<p>' . __( 'No Affiliates', 'affiliates-leader' ) . '</p>';
 		}
 
 		echo $after_widget;
